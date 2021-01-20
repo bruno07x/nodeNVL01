@@ -1,10 +1,23 @@
 const express = require('express');
-const { uuid } = require('uuidv4');
+const { uuid, isUuid } = require('uuidv4');
 const app = express();
 
 app.use(express.json());
 
 const projects = [];
+
+// * Create middleware to validate ID
+function validateID(request, response, next){
+    console.log('validateID');
+    const { id } = request.params;
+    if(!isUuid( id )){
+        return response.status(400).json( { error : "Invalid ID 💔" } );
+    }else{
+        return next();
+    }
+}
+
+app.use('/projects/:id', validateID);
 
 //* JSON sempre como array [] ou objeto {}
 // * GET

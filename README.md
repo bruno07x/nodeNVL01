@@ -29,6 +29,8 @@
 
 ## Notes 📝
 
+OBS: Node funciona de forma linear! 🛑
+
 > src/index.js
 
 ````
@@ -106,6 +108,47 @@ app.delete('/projects/:id', (request, response) => {
 	});
 });
 ```
+
+### Middlewares
+Interceptador de requisições (**interrompe totalmente ou altera dados**) que muda os dados antes de retornar a **reponse**.
+* São funções que possuem os seguintes parâmetros:
+	* request
+	* response
+	* next (pode não existir)
+		* next() ▶ função que caso não exista interrompe as funções abaixo.
+
+> Criando middleware
+```
+function middlewaresSample (request, response, next){
+	const { method, url } = request;
+	const logLabel = `[${method.toUpperCase()}] ${url}`;
+	console.log(logLabel);
+	return next(); //Executa os próximos middlwares
+}
+```
+> Chamando middleware no cód. todo
+
+`app.use(middlewaresSample);`
+
+> Chamando middleware dentro de outro midddleware ou função.
+```
+app.get('/projects', middlewaresSample, middlewaresSample2, (request, response) => {
+    // * Pega os query params da requisição
+    const { type } = request.query;
+
+    if(type){
+        const projectsFiltered = projects.filter( project => project.type.includes(type) );
+        return response.json( projectsFiltered );
+    }else{
+        return response.json( projects );
+    }
+});
+```
+
+> Chamando middleware em determidas rotas
+
+`app.use('/projects/:id', middlewaresSample);`
+
 ---
 
 ## Running 🏃‍♀️
