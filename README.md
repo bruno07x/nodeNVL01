@@ -61,12 +61,21 @@ app.listen(3333, () => {
 
 ### Tipos de parâmetros
 **Query params** → Filtros e paginação
+
 `/projects?title=react&nivel=0`
+
 **Route params** → Identifica recursos (atualizar e deletar)
+
 `/projects/1`
+
 **Request body** → Conteúdo (JSON) usado na hora de criar ou editar recursos
+
 *Informação enviada via JSON no body*
-![c87f440d48d26e99cbad013c7cdc7e7b.png](:/1464bd4ccc814e928deed6d0743dc767)
+```
+{
+	"title" : "Projeto Node",
+	"type" : "node"
+}
 ```
 <!-- GET -->
 app.get('/projects', (request, response) => {
