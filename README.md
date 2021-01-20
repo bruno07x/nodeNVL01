@@ -1,5 +1,7 @@
-# Node NVL01 (learning project)
+# Node NVL01
 ## Vantagens / Intro 💡
+
+
 ---
 
 ## Install 🏹
@@ -104,6 +106,44 @@ app.delete('/projects/:id', (request, response) => {
 	});
 });
 ```
+---
+
+## Running 🏃‍♀️
+`yarn dev`
+
+### Routes
+Requests methods available (`GET`, `POST`, `PUT`, `DELETE`)
+
+#### GET
+`/projects` ▶ List all of projects
+`/projects?type=node` ▶ List all of projects that contais node
+
+#### POST
+`/projects` ▶ Create a project
+Body Params sample:
+```
+{
+	"title" : "Projeto de react native NVL 1",
+	"owner" : "Couto",
+	"type" : "react native"
+}
+```
+
+#### PUT
+`/projects/600e407c-126a-4904-8149-ee21a956afbf` ▶ Edit a specific project finded by id
+Body Params sample:
+```
+{
+	"title" : "Projeto de react native NVL 1",
+	"owner" : "Couto",
+	"type" : "react native"
+}
+```
+
+#### DELETE
+`/projects/600e407c-126a-4904-8149-ee21a956afbf` ▶ Delete a specific project finded by id
+
+---
 
 ## Solve Errors ❤
 **Error:** EADDRINUSE, Address already in use
